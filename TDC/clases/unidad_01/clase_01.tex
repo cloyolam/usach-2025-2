@@ -89,7 +89,6 @@
     \centering
     \includegraphics[width=.55\linewidth]{images/paraguas.png}
   \end{figure}
-
 \end{frame}
 
 
@@ -259,7 +258,48 @@
 \end{frame}
 
 
-\begin{frame}{Deducción natural: ejemplo 1}
+\begin{frame}{Deducción natural: motivación}
+  Consideremos el siguiente argumento:
+  \begin{quote}
+    Si el tren llega tarde y no hay taxis en la estación, entonces José llega
+    tarde a su reunión. José no llega tarde a su reunión. El tren llegó tarde.
+    Por lo tanto, sí había taxis en la estación.
+  \end{quote}
+
+  Sean las proposiciones:
+  \begin{itemize}
+    \item p = 'El tren llega tarde'
+    \item q = 'Hay taxis en la estación'
+    \item r = 'José llega tarde a su reunión'
+  \end{itemize}
+
+  ¿Cómo podemos construir un procedimiento tal que podamos razonar a través de
+  proposiciones y con ello determinar la validez de una conclusión?
+\end{frame}
+
+
+\begin{frame}{Deducción natural}
+  En deducción natural existe una colección de reglas de prueba, las que
+  permiten inferir fórmulas a partir de otras fórmulas. Así, aplicando
+  sucesivamente las reglas de prueba, podemos inferir una conclusión a partir de
+  un conjunto de premisas.\\
+
+  Supongamos que tenemos un conjunto de fórmulas
+  $\upvarphi_{1},\ \upvarphi_{2},...,\ \upvarphi_{n}$, el que llamaremos
+  premisas, y otra fórmula $\Uppsi$, la cual será llamada conclusión. Al aplicar
+  reglas de prueba a las premisas, esperamos obtener algunas fórmulas más, las
+  que al aplicar sobre ellas las reglas de prueba nos permitan eventualmente
+  llegar a la conclusión. Lo anterior será denotado como:
+
+  $$\upvarphi_{1}, \upvarphi_{2},..., \upvarphi_{n} \vdash \Uppsi$$
+
+  Esta expresión se conoce como \textbf{secuente} y será válida si es posible
+  encontrar una demostración.
+
+\end{frame}
+
+
+\begin{frame}{Deducción natural: reglas}
   \begin{itemize}
     \item Adjunción o introducción de la conjunción (IC):
     $$\dfrac{\upvarphi \quad \Uppsi}{\upvarphi \land \Uppsi}$$
@@ -277,7 +317,9 @@
   \end{itemize}
 
   Utilice las reglas de inferencia anteriores para probar que:
-  $$p \land q, r \vdash q\land r$$
+  \begin{enumerate}
+    \item $p \land q, r \vdash q\land r$
+  \end{enumerate}
 \end{frame}
 
 
@@ -295,7 +337,7 @@
 \end{frame}
 
 
-\begin{frame}{Deducción natural: ejemplo 2}
+\begin{frame}{Deducción natural: reglas}
   \begin{itemize}
     \item Eliminación de la implicancia (EI) o modus ponens:
     $$\dfrac{\upvarphi \quad \upvarphi \rightarrow \Uppsi}{\Uppsi}$$
@@ -318,7 +360,11 @@
   \end{itemize}
 
   Utilice las reglas de inferencia anteriores para probar que:
-  $$s \rightarrow \sim t, s, \sim t \rightarrow r \vdash r$$
+  \begin{enumerate}
+    \setcounter{enumi}{1}
+    \item $s \rightarrow \sim t, s, \sim t \rightarrow r \vdash r$
+    \item $p \rightarrow q \vdash \sim q \rightarrow \sim p$
+  \end{enumerate}
 \end{frame}
 
 
@@ -334,33 +380,6 @@
     \cline{1-2}
     &\qquad \quad r &\text{(EI (4, 3))}
   \end{align*}
-\end{frame}
-
-
-\begin{frame}{Deducción natural: ejemplo 3}
-  \begin{itemize}
-    \item Eliminación de la implicancia (EI) o modus ponens:
-    $$\dfrac{\upvarphi \quad \upvarphi \rightarrow \Uppsi}{\Uppsi}$$
-
-    \item Modus tollens (MT) o negación del consecuente:
-    $$\dfrac{\upvarphi \rightarrow \Uppsi \quad \sim \Uppsi}{\sim \upvarphi}$$
-
-    \item Adjunción o introducción de la implicancia (II):
-          \begin{equation*}
-            \frac{
-              \fbox{
-                $\begin{array}{c}
-                  \upvarphi \\
-                  \vdots \\
-                  \Uppsi
-                \end{array}$
-              }
-            }{\upvarphi \rightarrow \Uppsi}
-          \end{equation*}
-  \end{itemize}
-
-  Utilice las reglas de inferencia anteriores para probar que:
-  $$p \rightarrow q \vdash \sim q \rightarrow \sim p$$
 \end{frame}
 
 
@@ -383,7 +402,7 @@
 \end{frame}
 
 
-\begin{frame}{Deducción natural: ejemplo 4}
+\begin{frame}{Deducción natural: reglas}
   \begin{itemize}
     \item Adjunción o introducción de la doble negación (IDN):
     $$\dfrac{\upvarphi}{\sim \sim \upvarphi}$$
@@ -393,7 +412,10 @@
   \end{itemize}
 
   Utilice las reglas de inferencia anteriores para probar que:
-  $$p \rightarrow q, p \vdash \sim \sim q$$
+  \begin{enumerate}
+    \setcounter{enumi}{3}
+    \item $p \rightarrow q, p \vdash \sim \sim q$
+  \end{enumerate}
 \end{frame}
 
 
@@ -411,12 +433,16 @@
 \end{frame}
 
 
-\begin{frame}{Deducción natural: ejemplo 5}
+\begin{frame}{Deducción natural: reglas}
   \centering
   \includegraphics[width=0.5\textwidth]{images/reglas_inferencia.png}
 
   Utilice las reglas de inferencia anteriores para probar que:
-  $$p \vee q \vdash q \vee p$$
+  \begin{enumerate}
+    \setcounter{enumi}{4}
+    \item $p \vee q \vdash q \vee p$
+  \end{enumerate}
+
 \end{frame}
 
 
@@ -442,7 +468,7 @@
 \end{frame}
 
 
-\begin{frame}{Deducción natural: ejemplo 6}
+\begin{frame}{Deducción natural: reglas}
   \begin{itemize}
     \item Adjunción o introducción de la negación (IN):
           \begin{equation*}
@@ -463,7 +489,10 @@
   \end{itemize}
 
   Utilice las reglas de inferencia anteriores para probar que:
-  $$p \rightarrow \sim p \vdash \sim p$$
+  \begin{enumerate}
+    \setcounter{enumi}{5}
+    \item $p \rightarrow \sim p \vdash \sim p$
+  \end{enumerate}
 \end{frame}
 
 
@@ -487,7 +516,7 @@
 \end{frame}
 
 
-\begin{frame}{Deducción natural: ejemplo 7}
+\begin{frame}{Deducción natural: reglas}
   \begin{itemize}
     \item Demostración por contradicción (DPC):
           \begin{equation*}
@@ -504,7 +533,10 @@
   \end{itemize}
 
   Utilice las reglas de inferencia anteriores para probar que:
-  $$\sim p \rightarrow \perp \quad \vdash p$$
+  \begin{enumerate}
+    \setcounter{enumi}{6}
+    \item $\sim p \rightarrow \perp \quad \vdash p$
+  \end{enumerate}
 \end{frame}
 
 
