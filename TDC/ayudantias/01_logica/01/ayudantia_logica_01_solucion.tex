@@ -1,0 +1,227 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[spanish]{babel}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{float}
+\usepackage[T1]{fontenc}
+\usepackage[rmargin=3cm,lmargin=3cm,tmargin=3cm,bmargin=4cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{latexsym}
+\usepackage{multirow}
+\usepackage[spanish]{syllogism}
+\usepackage{tikz}
+\usepackage{tikz-qtree}
+
+\clubpenalty=10000
+\widowpenalty=10000
+
+\begin{document}
+
+\title{Ayudantía Unidad 1: Lógica (parte 1)}
+\author{Teoría de la Computación 2-2025}
+\date{}
+
+\maketitle
+
+\section{Tablas de verdad}
+
+\subsection{Reglas generales}
+
+\begin{itemize}
+  \item La cantidad de filas que tendrá la tabla es $2^n$, siendo $n$ el número
+        de proposiciones simples que hay en la fórmula.
+  \item Para establecer todas las combinaciones posibles de valores de verdad
+        asignaremos a la primera mitad de las filas de $p$ el valor 0, y a la
+        otra mitad, el valor 1. Luego, a $q$ le asignaremos 0 a la mitad de la
+        mitad de $p$, luego 1 a la otra mitad de la mitad y así sucesivamente.
+        \textbf{Ejemplo:}
+  \begin{table}[H]
+    \centering
+    \begin{tabular}{c|c}
+      $p$ & $q$ \\
+      \hline
+      \hline
+      0 & 0 \\
+      0 & 1 \\
+      1 & 0 \\
+      1 & 1 \\
+    \end{tabular}
+  \end{table}
+  \item Para cada fórmula, indique si corresponde a una tautología, a una
+        contingencia o a una contradicción.
+\end{itemize}
+
+\begin{enumerate}
+
+  \item $\sim (p \vee \sim p) \land (q \land(\sim p \vee r))$ \qquad
+        (Contradicción)
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{c|c|c||c|c|c|c|c}
+    $p$ & $q$ & $r$ & $\sim p$ & \begin{tabular}[c]{@{}c@{}}$\sim (p \vee \sim p)$\\ \textcircled{\raisebox{-0.9pt}{A}}\end{tabular} & $\sim p \vee r$ & \begin{tabular}[c]{@{}c@{}}$q \land (\sim p \vee r)$\\ \textcircled{\raisebox{-0.9pt}{B}}\end{tabular} & $\textcircled{\raisebox{-0.9pt}{A}} \land \textcircled{\raisebox{-0.9pt}{B}}$ \\ \hline \hline
+    0 & 0 & 0 & 1 & 0 & 1 & 0 & 0 \\ \hline
+    0 & 0 & 1 & 1 & 0 & 1 & 0 & 0 \\ \hline
+    0 & 1 & 0 & 1 & 0 & 1 & 1 & 0 \\ \hline
+    0 & 1 & 1 & 1 & 0 & 1 & 1 & 0 \\ \hline
+    1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+    1 & 0 & 1 & 0 & 0 & 1 & 0 & 0 \\ \hline
+    1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+    1 & 1 & 1 & 0 & 0 & 1 & 1 & 0 \\
+  \end{tabular}
+\end{table}
+
+\newpage
+
+  \item $\sim (p \land \sim q) \leftrightarrow (p \rightarrow q)$ \qquad
+        (Tautología)
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{c|c|c|c|c|c}
+    p & q & $\sim q$ & \begin{tabular}[c]{@{}c@{}}$\sim (p \land \sim q)$\\ \textcircled{\raisebox{-0.9pt}{A}}\end{tabular} & \begin{tabular}[c]{@{}c@{}}$p \rightarrow q$\\ \textcircled{\raisebox{-0.9pt}{B}}\end{tabular} & $\textcircled{\raisebox{-0.9pt}{A}} \leftrightarrow \textcircled{\raisebox{-0.9pt}{B}}$ \\ \hline \hline
+    0 & 0 & 1 & 1 & 1 & 1 \\ \hline
+    0 & 1 & 0 & 1 & 1 & 1 \\ \hline
+    1 & 0 & 1 & 0 & 0 & 1 \\ \hline
+    1 & 1 & 0 & 1 & 1 & 1 \\
+  \end{tabular}
+\end{table}
+
+
+  \item
+        $(p \vee q) \land ((r \leftrightarrow \sim s) \rightarrow (\sim r \land p))$
+        \qquad (Contingencia)
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{c|c|c|c|c|c|c|c|c|c|c}
+    $p$ & $q$ & $r$ & $s$ & $\sim r$ & $\sim s$ & \begin{tabular}[c]{@{}c@{}}$p \vee q$\\ \textcircled{\raisebox{-0.9pt}{A}}\end{tabular} & \begin{tabular}[c]{@{}c@{}}$r \leftrightarrow \sim s$\\ \textcircled{\raisebox{-0.9pt}{B}}\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\sim r \land p$\\ \textcircled{\raisebox{-0.9pt}{C}}\end{tabular} & $\textcircled{\raisebox{-0.9pt}{B}} \rightarrow \textcircled{\raisebox{-0.9pt}{C}}$ & $\textcircled{\raisebox{-0.9pt}{A}} \land (\textcircled{\raisebox{-0.9pt}{B}} \rightarrow \textcircled{\raisebox{-0.9pt}{C}})$ \\ \hline \hline
+    0 & 0 & 0 & 0 & 1 & 1 & 0 & 0 & 0 & 1 & 0 \\ \hline
+    0 & 0 & 0 & 1 & 1 & 0 & 0 & 1 & 0 & 0 & 0 \\ \hline
+    0 & 0 & 1 & 0 & 0 & 1 & 0 & 1 & 0 & 0 & 0 \\ \hline
+    0 & 0 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\ \hline
+    0 & 1 & 0 & 0 & 1 & 1 & 1 & 0 & 0 & 1 & 1 \\ \hline
+    0 & 1 & 0 & 1 & 1 & 0 & 1 & 1 & 0 & 0 & 0 \\ \hline
+    0 & 1 & 1 & 0 & 0 & 1 & 1 & 1 & 0 & 0 & 0 \\ \hline
+    0 & 1 & 1 & 1 & 0 & 0 & 1 & 0 & 0 & 1 & 1 \\ \hline
+    1 & 0 & 0 & 0 & 1 & 1 & 1 & 0 & 1 & 1 & 1 \\ \hline
+    1 & 0 & 0 & 1 & 1 & 0 & 1 & 1 & 1 & 1 & 1 \\ \hline
+    1 & 0 & 1 & 0 & 0 & 1 & 1 & 1 & 0 & 0 & 0 \\ \hline
+    1 & 0 & 1 & 1 & 0 & 0 & 1 & 0 & 0 & 1 & 1 \\ \hline
+    1 & 1 & 0 & 0 & 1 & 1 & 1 & 0 & 1 & 1 & 1 \\ \hline
+    1 & 1 & 0 & 1 & 1 & 0 & 1 & 1 & 1 & 1 & 1 \\ \hline
+    1 & 1 & 1 & 0 & 0 & 1 & 1 & 1 & 0 & 0 & 0 \\ \hline
+    1 & 1 & 1 & 1 & 0 & 0 & 1 & 0 & 0 & 1 & 1 \\
+  \end{tabular}
+\end{table}
+
+\end{enumerate}
+
+\newpage
+
+\section{Deducción natural}
+Demuestre los siguientes secuentes utilizando deducción natural. En cada paso,
+debe indicar exactamente cuál fue la regla utilizada y sobre qué fórmulas se
+aplicó.
+
+\begin{enumerate}
+
+  \item
+        $p \land (q\rightarrow (p \rightarrow s)), p \rightarrow (q \land r) \vdash p \rightarrow s$
+
+  \begin{align*}
+    &(1) \quad p \land (q\rightarrow (p \rightarrow s))  & \quad (\text{premisa}) \\
+    &(2) \quad  p \rightarrow (q \land r) & \quad (\text{premisa}) \\
+    &(3) \quad  p & \quad (EC1(1)) \\
+    &(4) \quad  q \rightarrow (p \rightarrow s) & \quad (EC2(1)) \\
+    &(5) \quad  q \land r & \quad (EI(3, 2)) \\
+    &(6) \quad  q & \quad (EC1(5)) \\
+    \cline{1-2}
+    & \qquad p \rightarrow s & \quad (EI(6,4))
+  \end{align*}
+
+
+  \item $p \rightarrow (q \rightarrow r \vee s), p, r \rightarrow t, s \rightarrow t, q\land m \vdash t$
+
+  \begin{align*}
+    (1)&\quad p \rightarrow (q \rightarrow r \vee s) & \quad (\text{premisa}) \\
+    (2)&\quad p & \quad (\text{premisa}) \\
+    (3)&\quad r \rightarrow t & \quad (\text{premisa}) \\
+    (4)&\quad s \rightarrow t & \quad (\text{premisa}) \\
+    (5)&\quad q \land m & \quad (\text{premisa}) \\
+    (6)&\quad q \rightarrow (r \vee s) & \quad (EI(2, 1)) \\
+    (7)&\quad q & \quad (EC1(5)) \\
+    (8)&\quad r \vee s & \quad (EI(7, 6)) \\
+    (9)&\quad r & \quad (supuesto) \\
+    (10)& \quad t & \quad (EI(9, 3)) \\
+    (11)& \quad s & \quad (supuesto) \\
+    (12)& \quad t & \quad (EI(11, 4)) \\
+    \cline{1-2}
+       & \qquad t & \quad (ED(8, 9-10, 11-12))
+  \end{align*}
+
+  \newpage
+
+  \item $p \land (\sim q \rightarrow \sim p) \vdash (q \land p) \vee \sim p$
+        \quad (PEP 1 2025-1)
+
+        \begin{align*}
+          &(1) \quad p \land (\sim q \rightarrow \sim p)  & \quad (\text{premisa}) \\
+          &(2) \quad p & \quad (EC1(1)) \\
+          &(3) \quad \sim q \rightarrow \sim p & \quad (EC2(1)) \\
+          &(4) \quad \sim (\sim p) & \quad (IDN(2)) \\
+          &(5) \quad \sim (\sim q) & \quad (MT(4, 3)) \\
+          &(6) \quad q & \quad (EDN(5)) \\
+          &(7) \quad q \land p & \quad (IC(6, 2))\\
+          \cline{1-2}
+          & \qquad (q \land p) \vee \sim p & \quad (ID1(7))
+        \end{align*}
+
+
+  \item
+        $((p \land q) \rightarrow (r \land s)) \land ((r \land s) \rightarrow (p \land q)), t \land (t \rightarrow s) \vdash r \rightarrow p$
+        \quad (PEP 1 2025-1)
+
+        \begin{align*}
+          &(1) \quad ((p \land q) \rightarrow (r \land s)) \land ((r \land s) \rightarrow (p \land q))  & \quad (\text{premisa}) \\
+          &(2) \quad t \land (t \rightarrow s) & \quad (\text{premisa}) \\
+          &(3) \quad (r \land s) \rightarrow (p \land q) & \quad (EC2(1)) \\
+          &(4) \quad t & \quad (EC1(2)) \\
+          &(5) \quad t \rightarrow s & \quad (EC2(2)) \\
+          &(6) \quad s & \quad (EI(4, 5)) \\
+          &(7) \quad r & \quad (supuesto) \\
+          &(8) \quad r \land s & \quad (IC(7, 6)) \\
+          &(9) \quad p \land q & \quad (EI(8, 3)) \\
+          &(10) \quad p & \quad (EC1(9)) \\
+          \cline{1-2}
+          & \qquad r \rightarrow p & \quad (II(7-10))
+        \end{align*}
+
+
+
+%  \item $(p \vee q) \vee (\sim r \rightarrow s), q \rightarrow r, \sim s \vdash p \vee r$ %\quad \textbf{(Ayudantía)}
+
+%   \begin{align*}
+%     (1)&\quad (p \vee q) \vee (\sim r \rightarrow s)  & \quad (\text{premisa}) \\
+%     (2)&\quad q \rightarrow r & \quad (\text{premisa}) \\
+%     (3)&\quad \sim s & \quad (\text{premisa}) \\
+%     (4)&\quad p \vee q & \quad (supuesto) \\
+%     (5)&\quad p & \quad (supuesto) \\
+%     (6)&\quad p \vee r & \quad (ID1(5)) \\
+%     (7)&\quad q & \quad (supuesto) \\
+%     (8)&\quad r & \quad (EI(7, 2)) \\
+%     (9)&\quad p \vee r & \quad (ID2(8)) \\
+%     (10)&\quad p \vee r & \quad (ED(4, 5-6, 7-9) \\
+%     (11)&\quad \sim r \rightarrow s  & \quad (\text{supuesto}) \\
+%     (12)&\quad \sim(\sim r) & \quad (MT(3, 11)) \\
+%     (13)&\quad r & \quad (EDN(12)) \\
+%     (14)&\quad p \vee r & \quad (ID2(13)) \\
+%     \cline{1-2}
+%     & \qquad p \vee r & \quad (ED(1, 4-10, 11-14))
+%   \end{align*}
+\end{enumerate}
+
+
+\end{document}

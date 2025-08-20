@@ -1,0 +1,93 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[spanish]{babel}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{float}
+\usepackage[T1]{fontenc}
+\usepackage[rmargin=3cm,lmargin=3cm,tmargin=3cm,bmargin=4cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{latexsym}
+\usepackage{multirow}
+\usepackage[spanish]{syllogism}
+\usepackage{tikz}
+\usepackage{tikz-qtree}
+
+\clubpenalty=10000
+\widowpenalty=10000
+
+\begin{document}
+
+\title{Ayudantía Unidad 1: Lógica (parte 1)}
+\author{Teoría de la Computación 2-2025}
+\date{}
+
+\maketitle
+
+\section{Tablas de verdad}
+
+\subsection{Reglas generales}
+
+\begin{itemize}
+  \item La cantidad de filas que tendrá la tabla es $2^n$, siendo $n$ el número
+        de proposiciones simples que hay en la fórmula.
+  \item Para establecer todas las combinaciones posibles de valores de verdad
+        asignaremos a la primera mitad de las filas de $p$ el valor 0, y a la
+        otra mitad, el valor 1. Luego, a $q$ le asignaremos 0 a la mitad de la
+        mitad de $p$, luego 1 a la otra mitad de la mitad y así sucesivamente.
+        \textbf{Ejemplo:}
+  \begin{table}[H]
+    \centering
+    \begin{tabular}{c|c}
+      $p$ & $q$ \\
+      \hline
+      \hline
+      0 & 0 \\
+      0 & 1 \\
+      1 & 0 \\
+      1 & 1 \\
+    \end{tabular}
+  \end{table}
+  \item Para cada fórmula, indique si corresponde a una tautología, a una
+        contingencia o a una contradicción.
+\end{itemize}
+
+\begin{enumerate}
+  \item $\sim (p \vee \sim p) \land (q \land(\sim p \vee r))$
+
+  \item $\sim (p \land \sim q) \leftrightarrow (p \rightarrow q)$
+
+  \item
+        $(p \vee q) \land ((r \leftrightarrow \sim s) \rightarrow (\sim r \land
+        p))$
+\end{enumerate}
+
+
+\section{Deducción natural}
+Demuestre los siguientes secuentes utilizando deducción natural. En cada paso,
+debe indicar exactamente cuál fue la regla utilizada y sobre qué fórmulas se
+aplicó.
+
+\begin{enumerate}
+
+  \item
+        $p \land (q\rightarrow (p \rightarrow s)), p \rightarrow (q \land r) \vdash p \rightarrow s$
+
+  \item
+        $p \rightarrow (q \rightarrow r \vee s), p, r \rightarrow t, s \rightarrow t, q\land m \vdash t$
+
+  \item $p \land (\sim q \rightarrow \sim p) \vdash (q \land p) \vee \sim p$
+        \quad (PEP 1 2025-1)
+
+  \item
+        $((p \land q) \rightarrow (r \land s)) \land ((r \land s) \rightarrow (p \land q)), t \land (t \rightarrow s) \vdash r \rightarrow p$
+        \quad (PEP 1 2025-1)
+
+
+%  \item $(p \vee q) \vee (\sim r \rightarrow s), q \rightarrow r, \sim s \vdash p \vee r$ %\quad \textbf{(Ayudantía)}
+
+\end{enumerate}
+
+
+\end{document}
