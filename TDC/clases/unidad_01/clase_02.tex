@@ -355,7 +355,7 @@ Computación]{cristobal.loyola@usach.cl} \date{}
 \begin{frame}{Lógica proposicional: Semántica}
   \textbf{Definición:} un conjunto de fórmulas $\Sigma$ es satisfacible
   \textbf{si existe al menos una valuación} $\sigma$ que hace verdaderas a todas
-  las fórmulas de $\sigma$. Esto último se denota como:
+  las fórmulas de $\Sigma$. Esto último se denota como:
 
   $$\sigma \vDash \Sigma$$
 
@@ -393,7 +393,7 @@ Computación]{cristobal.loyola@usach.cl} \date{}
   \[
     \begin{array}{c}
       \text{Si toma el medicamento, se recuperará.} \\
-      \text{Usted no está tomando el medicamente} \\
+      \text{Usted no está tomando el medicamento.} \\
       \hline
       \text{Por lo tanto, usted no se recuperará.}
     \end{array}
@@ -482,7 +482,7 @@ Computación]{cristobal.loyola@usach.cl} \date{}
   una \textbf{disyunción} de cláusulas duales. Si cada $c^{'}_{i}$ es una
   cláusula dual, entonces la FND es de la forma:
 
-  $$c^{'}_{1} \vee c^{'}_{2} \land c^{'}_{3} \land ... \land c^{'}_{n}$$
+  $$c^{'}_{1} \vee c^{'}_{2} \vee c^{'}_{3} \vee ... \vee c^{'}_{n}$$
 
   Por ejemplo, la siguiente fórmula está en FND:
   $$(p \land q) \vee q \vee (\sim p \land s)$$
