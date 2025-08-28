@@ -14,6 +14,7 @@
 \usepackage{tikz}
 \usepackage{tikz-qtree}
 \usepackage{upgreek}
+\usepackage{xcolor}
 
 \clubpenalty=10000
 \widowpenalty=10000
@@ -97,10 +98,7 @@ $$\upvarphi = q \vee s$$
   \includegraphics[width=.6\textwidth]{images/resolucion_02.pdf}
 \end{figure}
 
-
-
-
-
+Por lo tanto, logramos demostrar que $\{p \rightarrow q,\ p \vee r,\ r \rightarrow s\} \vDash q \vee s$
 
 
 \subsection{Ejemplo 3}
@@ -111,17 +109,75 @@ para el conjunto de premisas:
 $$\Sigma = \{p \rightarrow \neg q,\ \neg q \rightarrow (\neg r \land s), \ t,\ t\rightarrow q\}$$
 
 
+\textbf{Paso 1:}
+\begin{itemize}
+  \item{\makebox[8cm][l]{$p \rightarrow \neg q \Leftrightarrow \underbrace{\neg p \vee \neg q}_{C_{1}}$}
+        (premisa 1)}
+
+  \item{\makebox[8cm][l]{$\neg q \rightarrow (\neg r \land s) \Leftrightarrow q \vee (\neg r \land s)$}
+        (premisa 2)}
+
+        {\makebox[8cm][l]{$\phantom{\neg q \rightarrow (\neg r \land s)} \Leftrightarrow \underbrace{(q \vee \neg r)}_{C_{2}} \land \underbrace{(q \vee s)}_{C_{3}}$}
+        (distributividad)}
+
+
+  \item{\makebox[8cm][l]{$\underbrace{t}_{C_{4}}$} (premisa 3)}
+
+  \item{\makebox[8cm][l]{$t \rightarrow q \Leftrightarrow \underbrace{\neg t \vee q}_{C_{5}}$}
+        (premisa 4)}
+
+
+  \item{\makebox[8cm][l]{$\neg (p \rightarrow (\neg r \land \neg s)) \Leftrightarrow \neg (\neg p \vee (\neg r \land \neg s))$}
+        (negación de la consecuencia)}
+
+        {\makebox[8cm][l]{$\phantom{\neg (p \rightarrow (\neg r \land \neg s))} \Leftrightarrow p \land \neg (\neg r \land \neg s)$}
+        (De Morgan)}
+
+        {\makebox[8cm][l]{$\phantom{\neg (p \rightarrow (\neg r \land \neg s))} \Leftrightarrow \underbrace{p}_{C_{6}} \land \underbrace{(r \vee s)}_{C_{7}}$}
+        (De Morgan)}
+\end{itemize}
+
+\textbf{Paso 2:}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=.8\textwidth]{images/resolucion_03.pdf}
+\end{figure}
+
+Por lo tanto, logramos demostrar que:
+$$\{p \rightarrow \neg q,\ \neg q \rightarrow (\neg r \land s), \ t,\ t\rightarrow q\} \vDash p \rightarrow (\neg r \land \neg s)$$
+
+
+\newpage
 
 \section{Lógica de primer orden: formas normales}
 
 \begin{enumerate}
   \item Obtenga la forma normal prenexa de:
-  $$\neg[\forall x \exists y\ M(x, y, z) \rightarrow \exists x (\neg \forall y\ G(y, w) \rightarrow H(x))]$$
+        \begin{align*}
+          &\neg[\forall x \exists y\ M(x, y, z) \rightarrow \exists x (\neg \forall y\ G(y, w) \rightarrow H(x))] \\
+          \Leftrightarrow &\neg[\forall x \exists y\ M(x, y, z) \rightarrow \exists x (\neg \forall \textcolor{red}{s}\ G(\textcolor{red}{s}, w) \rightarrow H(x))] & (\text{rectificación})\\
+          \Leftrightarrow &\neg[\forall x \exists y\ M(x, y, z) \rightarrow \exists \textcolor{red}{t} (\neg \forall s\ G(s, w) \rightarrow H(\textcolor{red}{t}))] & (\text{rectificación})\\
+          \Leftrightarrow &\neg[\textcolor{red}{\neg} \forall x \exists y\ M(x, y, z) \textcolor{red}{\vee} \exists t (\textcolor{red}{\neg} (\neg \forall s\ G(s, w)) \textcolor{red}{\vee} H(t))] & (\text{eliminación de condicionales})\\
+          \Leftrightarrow &\neg[\neg \forall x \exists y\ M(x, y, z) \vee \exists t (\forall s\ G(s, w) \vee H(t))] & (\text{doble negación})\\
+          \Leftrightarrow &\neg[\textcolor{red}{\exists} x \textcolor{red}{\neg} \exists y\ M(x, y, z) \vee \exists t (\forall s\ G(s, w) \vee H(t))] & (\neg \forall x \upvarphi \Leftrightarrow \exists x \neg \upvarphi)\\
+          \Leftrightarrow &\neg[\exists x \textcolor{red}{\forall} y\ \textcolor{red}{\neg} M(x, y, z) \vee \exists t (\forall s\ G(s, w) \vee H(t))] & (\neg \exists x \upvarphi \Leftrightarrow \forall x \neg \upvarphi)\\
+          \Leftrightarrow &\neg[\exists x \forall y\ \neg M(x, y, z) \vee \exists t \textcolor{red}{\forall s} (G(s, w) \vee H(t))] & (s \text{ no libre en } H)\\
+          \Leftrightarrow &\neg \textcolor{red}{\exists x} \textcolor{red}{\forall y} \textcolor{red}{\exists t} \textcolor{red}{\forall s}[\neg M(x, y, z) \vee (G(s, w) \vee H(t))] & (\text{exteriorizar cuantificadores})\\
+          \Leftrightarrow &\textcolor{red}{\forall x} \textcolor{red}{\exists y} \textcolor{red}{\forall t} \textcolor{red}{\exists s} \textcolor{red}{\neg}[\neg M(x, y, z) \vee (G(s, w) \vee H(t))] & (\text{interiorizar negaciones})\\
+          \Leftrightarrow &\forall x \exists y \forall t \exists s [M(x, y, z) \textcolor{red}{\land} \textcolor{red}{\neg}(G(s, w) \vee H(t))] & (\text{De Morgan})\\
+          \Leftrightarrow &\forall x \exists y \forall t \exists s [M(x, y, z) \land \textcolor{red}{\neg} G(s, w) \textcolor{red}{\land} \textcolor{red}{\neg}H(t)] & (\text{De Morgan})\\
+        \end{align*}
 
-  \item Obtenga la forma normal de Skolem de:
-  $$\neg \forall x \exists r \forall y \exists z \exists w [(\neg S(x, z) \land P(b, y)) \vee (\neg P(x, z) \land S(w, r))]$$
 
-
+        \item Obtenga la forma normal de Skolem de:
+        \begin{align*}
+          &\neg \forall x \exists r \forall y \exists z \exists w [(\neg S(x, z) \land P(b, y)) \vee (\neg P(x, z) \land S(w, r))] \\
+          \Leftrightarrow &\textcolor{red}{\exists x} \textcolor{red}{\forall r} \textcolor{red}{\exists y} \textcolor{red}{\forall z} \textcolor{red}{\forall w} \textcolor{red}{\neg}[(\neg S(x, z) \land P(b, y)) \vee (\neg P(x, z) \land S(w, r))] & (\text{interiorizar negaciones}) \\
+          \Leftrightarrow &\exists x \forall r \exists y \forall z \forall w [\textcolor{red}{\neg} (\neg S(x, z) \land P(b, y)) \textcolor{red}{\land} \textcolor{red}{\neg} (\neg P(x, z) \land S(w, r))] & (\text{De Morgan}) \\
+          \Leftrightarrow &\exists x \forall r \exists y \forall z \forall w [(S(x, z) \textcolor{red}{\vee \neg} P(b, y)) \land (P(x, z) \textcolor{red}{\vee \neg} S(w, r))] & (\text{De Morgan}) \\
+          \Leftrightarrow &\forall r \exists y \forall z \forall w [(S(\textcolor{red}{f(C)}, z) \vee \neg P(b, y)) \land P(\textcolor{red}{f(C)}, z) \vee \neg S(w, r))] & (\text{eliminar }\exists x) \\
+          \Leftrightarrow &\forall r \forall z \forall w [(S(f(C), z) \vee \neg P(b, \textcolor{red}{g(r)})) \land P(f(C), z) \vee \neg S(w, r))] & (\text{eliminar } \exists y) \\
+        \end{align*}
 \end{enumerate}
 
 
