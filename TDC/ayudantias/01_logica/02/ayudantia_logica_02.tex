@@ -1,0 +1,62 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[spanish]{babel}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{float}
+\usepackage[T1]{fontenc}
+\usepackage[rmargin=3cm,lmargin=3cm,tmargin=3cm,bmargin=4cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{latexsym}
+\usepackage{multirow}
+\usepackage[spanish]{syllogism}
+\usepackage{tikz}
+\usepackage{tikz-qtree}
+\usepackage{upgreek}
+
+\clubpenalty=10000
+\widowpenalty=10000
+
+\begin{document}
+
+\title{Ayudantía Unidad 1: Lógica (parte 2)}
+\author{Teoría de la Computación 2-2025}
+\date{}
+
+\maketitle
+
+\section{Lógica proposicional: Resolución}
+Utilice el método de resolución para determinar si los siguientes enunciados son
+correctos:
+
+\begin{enumerate}
+  \item $\Sigma \vDash C$ para el conjunto de premisas:
+
+$$\Sigma = \{A \rightarrow (B \vee C),\ A,\ \neg B\}$$
+
+  \item Si consumo frutas, entonces tengo energía. Puedo consumir frutas o
+        comida chatarra. Si consumo comida chatarra, entonces me enfermo. Por lo
+        tanto, tengo energía o estoy enfermo.
+
+  \item $\Sigma \vDash p \rightarrow (\neg r \land \neg s)$ para el conjunto de
+        premisas:
+
+$$\Sigma = \{p \rightarrow \neg q,\ \neg q \rightarrow (\neg r \land s), \ t,\ t\rightarrow q\}$$
+\end{enumerate}
+
+
+\section{Lógica de primer orden: formas normales}
+
+\begin{enumerate}
+  \item Obtenga la forma normal prenexa de:
+  $$\neg[\forall x \exists y\ M(x, y, z) \rightarrow \exists x (\neg \forall y\ G(y, w) \rightarrow H(x))]$$
+
+  \item Obtenga la forma normal de Skolem de:
+  $$\neg \forall x \exists r \forall y \exists z \exists w [(\neg S(x, z) \land P(b, y)) \vee (\neg P(x, z) \land S(w, r))]$$
+
+
+\end{enumerate}
+
+
+\end{document}
