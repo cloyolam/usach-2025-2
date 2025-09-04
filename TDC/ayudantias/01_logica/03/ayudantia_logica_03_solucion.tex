@@ -35,6 +35,46 @@ Determine, si es posible, el unificador de máxima generalidad, indicando cada u
 $$E = f(x_{1},\ x_{3},\ x_{2})$$
 $$F = f(g(x_{2}),\ j(x_{4}),\ h(x_{3}, a))$$
 
+Aplicando el algoritmo de Robinson:
+
+\begin{itemize}
+  \item $k = 0$
+  \begin{align*}
+    &\sigma_{0} = \{\}\\
+    &E_{0} = \sigma_{0}(E) = f(x_{1},\ x_{3},\ x_{2})\\
+    &F_{0} = \sigma_{0}(F) = f(g(x_{2}),\ j(x_{4}),\ h(x_{3}, a))
+  \end{align*}
+
+
+  \item $k = 1$: par de discordancia $(x_{1},\ g(x_{2}))$
+  \begin{align*}
+    &\sigma_{1} = \{x_{1} / g(x_{2})\}\\
+    &E_{1} = \sigma_{1}(E_{0}) = f(g(x_{2}),\ x_{3},\ x_{2})\\
+    &F_{1} = \sigma_{1}(F_{0}) = f(g(x_{2}),\ j(x_{4}),\ h(x_{3}, a))
+  \end{align*}
+
+
+  \item $k = 2$: par de discordancia $(x_{3},\ j(x_{4}))$
+  \begin{align*}
+    &\sigma_{2} = \{x_{3}/j(x_{4})\}\\
+    &E_{2} = \sigma_{2}(E_{1}) = f(g(x_{2}),\ j(x_{4}),\ x_{2})\\
+    &F_{2} = \sigma_{2}(F_{1}) = f(g(x_{2}),\ j(x_{4}),\ h(j(x_{4}), a))
+  \end{align*}
+
+
+  \item $k = 3$: par de discordancia $(x_{2},\ h(j(x_{4}), a))$
+  \begin{align*}
+    &\sigma_{3} = \{x_{2}/h(j(x_{4}, a))\}\\
+    &E_{3} = \sigma_{3}(E_{2}) = f(g(h(j(x_{4}, a))),\ j(x_{4}),\ h(j(x_{4}, a)))\\
+    &F_{3} = \sigma_{3}(F_{2}) = f(g(h(j(x_{4}, a))),\ j(x_{4}),\ h(j(x_{4}), a))
+  \end{align*}
+\end{itemize}
+
+Dado que $E_{3} = F_{3}$, logramos unificar las expresiones $E$ y $F$ originales
+con el UMG:
+$$\sigma = \sigma_{3} \circ \sigma_{2} \circ \sigma_{1} = \{x_{1} / g(h(j(x_{4}, a))),\ x_{3}/j(x_{4}),\ x_{2}/h(j(x_{4}, a))\}$$
+
+
 \subsection{UMG 2}
 $$E = q(f(a),\ g(b, Y),\ m(X, f(Z)))$$
 $$F = q(X,\ g(b, c),\ m(f(a), Z))$$
